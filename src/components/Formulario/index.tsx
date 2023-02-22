@@ -1,16 +1,21 @@
 import React from 'react';
 import Botao from '../Botao';
 import style from './Formulario.module.scss'
+import { Itarefa } from '../../types/tarefa';
 
-class Formulario extends React.Component {
+class Formulario extends React.Component<{setTarefas:
+React.Dispatch<React.SetStateAction<Itarefa[]>>}> 
+
+    {
     state = {
         tarefa: "",
         tempo: "00:00"
     }
 
+
     adicionarTarefa(evento: React.FormEvent<HTMLFormElement>){
-        evento.preventDefault();
-        console.log('state:', this.state)  // Impede que a pagina seja atualizada automaticamente
+        evento.preventDefault(); // Impede que a pagina seja atualizada automaticamente
+        this.props.setTarefas(tarefasAntigas => [...tarefasAntigas, {...this.state}])
 
     }
 
